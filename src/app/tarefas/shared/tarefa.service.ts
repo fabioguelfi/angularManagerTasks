@@ -34,6 +34,64 @@ export class TarefaService {
     localStorage['tarefas'] = JSON.stringify(tarefas);
   }
 
+  /**
+   * Metodo responsavel por retornar tarefa por id
+   * caso o id exista no localstorage
+   * @param id number
+   * @return Tarefa
+   */
+  public buscarPorId(id: number): Tarefa {
+    const tarefas: Tarefa[] = this.listarTodos();
+    return tarefas.find(tarefa => tarefa.id === id);
+  }
 
+  /**
+   * Metodo Responsavel por atualizar uma tarefa
+   * no localstorage
+   * @param tarefa Tarefa
+   * @return void
+   */
+  public atualizar(tarefa: Tarefa): void {
+    const tarefas: Tarefa[] = this.listarTodos();
+    tarefas.forEach((obj, index, objs) => {
+      if (tarefa.id === obj.id) {
+        objs[index] = tarefa;
+      }
+    });
+    localStorage['tarefas'] = JSON.stringify(tarefas);
+  }
+
+  /**
+   * Metodo responsavel por acessar a lista
+   * de tarefas e fazer um filter buscando o
+   * id passado no parametro da funcao e
+   * retornar um array com todas tarefas exceto
+   * a que o id for igual ao parametro passado
+   * no metodo
+   * @param id number
+   * @return void
+   */
+  public remover(id: number): void {
+    let tarefas: Tarefa[] = this.listarTodos();
+    tarefas = tarefas.filter(tarefa => tarefa.id !== id);
+    localStorage['tarefas'] = JSON.stringify(tarefas);
+  }
+
+  /**
+   * Metodo Responsavel por atualizar o status da tarefa
+   * no localstorage e gravar novamente uma nova lista de
+   * tarefas
+   * @param id number
+   * @return void
+   */
+  public alterarStatus(id: number): void {
+    const tarefas = this.listarTodos();
+    tarefas.forEach((obj, index, objs) => {
+      if (id === obj.id) {
+        objs[index].concluida = !obj.concluida;
+      }
+    });
+    localStorage['tarefas'] = JSON.stringify(tarefas);
+  }
 
 }
