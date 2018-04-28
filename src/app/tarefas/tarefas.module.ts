@@ -7,6 +7,7 @@ import { ListarTarefaComponent } from './listar';
 import { TarefaService } from './shared/tarefa.service';
 import { CadastroTarefaComponent } from './cadastro';
 import { EditarTarefaComponent } from './editar';
+import { TarefaConcluidaDirective } from './shared/tarefa-concluida.directive';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { EditarTarefaComponent } from './editar';
   declarations: [
     ListarTarefaComponent,
     CadastroTarefaComponent,
-    EditarTarefaComponent
+    EditarTarefaComponent,
+    TarefaConcluidaDirective
   ],
   providers: [
     TarefaService
